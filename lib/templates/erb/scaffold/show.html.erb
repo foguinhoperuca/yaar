@@ -1,0 +1,28 @@
+<%%= content_for :content_header do %>
+  <h1>
+	<%%= t 'crud.show.title', table_name: <%= class_name %>.model_name.human %>
+  </h1>
+  <ol class="breadcrumb">
+	<li class="active">
+	  <%%= link_to <%= index_helper %>_path do %>
+		<i class="fa fa-home"></i> <span><%%= <%= class_name %>.model_name.human(:count => 2) %></span>
+		<%% end %>
+	</li>
+  </ol>
+<%% end %>
+
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+<p>
+  <strong><%%= <%= class_name %>.human_attribute_name("<%= attribute.name %>") %>:</strong>
+  <%- if attribute.reference? -%>
+	<%%= link_to <%= attribute.name %>_path(@<%= singular_table_name %>.<%= attribute.name %>) do %>
+	  <span class="label label-info"><%%= @<%= singular_table_name %>.<%= attribute.name %>&.id %></span>
+	<%% end %>
+  <%- else -%>
+	<%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+  <%- end -%>
+</p>
+
+<% end -%>
+
+<%%= link_to t('general.action.edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> | <%%= link_to t('general.action.back'), <%= index_helper %>_path %>

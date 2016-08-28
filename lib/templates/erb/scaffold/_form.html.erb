@@ -1,0 +1,62 @@
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+  <div id="error_explanation">
+    <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+
+    <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+        <li><%%= message %></li>
+		<%% end %>
+    </ul>
+  </div>
+  <%% end %>
+
+  <% attributes.each do |attribute| -%>
+    <% if attribute.password_digest? -%>
+  	  <div class="field">
+  		<%%= f.label :password %><br>
+  		<%%= f.password_field :password, :class => 'form-control' %>
+  	  </div>
+  	  <div>
+        <%%= f.label :password_confirmation %><br>
+        <%%= f.password_field :password_confirmation, :class => 'form-control' %>
+  	  </div>
+    <%- else -%>
+  	  <%- if attribute.reference? -%>
+  		<div class="field">
+		  <%% if @<%= attribute.name.pluralize %>.size != 1 %>
+			<%%= f.label :<%= attribute.name %> %><br />
+  			<%%= f.select :<%= attribute.column_name %>, @<%= attribute.name.pluralize %>.collect {|x| [x.id, x.id]}, {:include_blank => t('general.choose_option')}, :multiple => false, :class => 'form-control' %>
+		  <%% else %>
+		    <%%= f.hidden_field :<%= attribute.name %>_id, :value => (@<%= singular_table_name %>.<%= attribute.name %>.nil?) ? @<%= attribute.name.pluralize %>[0].id : @<%= singular_table_name %>.<%= attribute.name %>&.id  %>
+			<div class="info-box bg-aqua">
+			  <span class="info-box-icon"><i class="ion ion-person"></i></span>
+			  <div class="info-box-content">
+				<span class="info-box-text"><%%= t <%= attribute.name.camelcase %>.model_name.human %></span>
+				<span class="info-box-number"><%%= (@<%= singular_table_name %>.<%= attribute.name %>.nil?) ? @<%= attribute.name.pluralize %>[0].id : @<%= singular_table_name %>.<%= attribute.name %>&.id %></span>
+			  </div>
+			</div>
+		  <%% end %>
+  		</div>
+  	  <%- else -%>
+  		<%- if attribute.type.eql?(:boolean) -%>
+  		  <div class="field">
+  			<div class="checkbox">
+  			  <%%= f.label "<%= attribute.name %>" do %>
+  				<%%= f.<%= attribute.field_type %> :<%= attribute.name %> %> <%%= <%= class_name %>.human_attribute_name("<%= attribute.name %>") %>
+  				<%% end %>
+  			</div>
+  		  </div>
+  		<%- else -%>
+  		  <div class="field">
+  			<%%= f.label :<%= attribute.name %> %><br />
+  			<%%= f.<%= attribute.field_type %> :<%= attribute.name %>, :class => 'form-control' %>
+  		  </div>
+  		<%- end -%>
+  	  <%- end -%>
+    <% end -%>
+  <% end -%>
+  <div class="actions">
+  	<%%= f.submit %>
+  </div>
+<%% end %>
