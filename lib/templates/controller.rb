@@ -1,8 +1,9 @@
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
   <%= controller_before_filter %> :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
+<%- if !attributes.select { |attr| attr.reference? }.empty? -%>
   <%= controller_before_filter %> :set_dependencies, only: [:new, :edit, :create, :update]
-
+<%- end -%>
   respond_to :html
 
 <% unless options[:singleton] -%>

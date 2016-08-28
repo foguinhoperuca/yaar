@@ -32,8 +32,10 @@
 			<div class="info-box bg-aqua">
 			  <span class="info-box-icon"><i class="ion ion-person"></i></span>
 			  <div class="info-box-content">
-				<span class="info-box-text"><%%= t <%= attribute.name.camelcase %>.model_name.human %></span>
-				<span class="info-box-number"><%%= (@<%= singular_table_name %>.<%= attribute.name %>.nil?) ? @<%= attribute.name.pluralize %>[0].id : @<%= singular_table_name %>.<%= attribute.name %>&.id %></span>
+				<%%= link_to <%= attribute.name %>_path((@<%= singular_table_name %>.<%= attribute.name %>.nil?) ? @<%= attribute.name.pluralize %>[0] : @<%= singular_table_name %>.<%= attribute.name %>) do %>
+				  <span class="info-box-text"><%%= t <%= attribute.name.camelcase %>.model_name.human %></span>
+				  <span class="info-box-number"><%%= (@<%= singular_table_name %>.<%= attribute.name %>.nil?) ? @<%= attribute.name.pluralize %>[0].id : @<%= singular_table_name %>.<%= attribute.name %>&.id %></span>
+				<%% end %>
 			  </div>
 			</div>
 		  <%% end %>
