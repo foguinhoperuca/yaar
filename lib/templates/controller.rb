@@ -74,11 +74,13 @@ class <%= controller_class_name %>Controller < ApplicationController
   <%- attributes.select { |attr| attr.reference? }.each do |attribute| -%>
         @<%= attribute.name.pluralize %> = [].push(<%= attribute.name.camelize %>.find(params[:<%= attribute.name %>_id]))
   <%- end -%>
-  <%- attributes.select { |attr| attr.reference? }.each do |attribute| -%>
+  <%- if attributes.select { |attr| attr.reference? }.size > 1 -%>
+    <%- attributes.select { |attr| attr.reference? }.each do |attribute| -%>
       elsif params[:<%= attribute.name %>_id]
         @<%= attribute.name.pluralize %> = [].push(<%= attribute.name.camelize %>.find(params[:<%= attribute.name %>_id]))
-    <%- attributes.select { |attr| attr.reference? && attr != attribute }.each do |attribute_other| -%>
+      <%- attributes.select { |attr| attr.reference? && attr != attribute }.each do |attribute_other| -%>
         @<%= attribute_other.name.pluralize %> = <%= attribute_other.name.camelize %>.all
+      <%- end -%>
     <%- end -%>
   <%- end -%>
       else

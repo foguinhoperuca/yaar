@@ -16,8 +16,12 @@
   <strong><%%= <%= class_name %>.human_attribute_name("<%= attribute.name %>") %>:</strong>
   <%- if attribute.reference? -%>
 	<%%= link_to <%= attribute.name %>_path(@<%= singular_table_name %>.<%= attribute.name %>) do %>
-	  <span class="label label-info"><%%= @<%= singular_table_name %>.<%= attribute.name %>&.id %></span>
-	<%% end %>
+  <span class="label label-info"><%%= @<%= singular_table_name %>.<%= attribute.name %>&.id %></span>
+    <%% end %>
+  <%- elsif attribute.type.eql?(:boolean) -%>
+  <span class="label label-<%%= @<%= singular_table_name %>.<%= attribute.name %> ? 'success' : 'danger' %>">
+	<%%= @<%= singular_table_name %>.<%= attribute.name %> ? t('general.bool_yes') : t('general.bool_no') %>
+  </span>	  
   <%- else -%>
 	<%%= @<%= singular_table_name %>.<%= attribute.name %> %>
   <%- end -%>

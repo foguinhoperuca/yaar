@@ -38,6 +38,12 @@
 				  <span class="label label-info"><%%= <%= singular_table_name %>.<%= attribute.name %>&.id %></span>
 				<%% end %>
 			  </td>
+			<%- elsif attribute.type.eql?(:boolean) -%>
+			  <td>
+				<span class="label label-<%%= <%= singular_table_name %>.<%= attribute.name %> ? 'success' : 'danger' %>">
+				  <%%= <%= singular_table_name %>.<%= attribute.name %> ? t('general.bool_yes') : t('general.bool_no') %>
+				</span>
+			  </td>
 			<%- else -%>
 			  <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 			<%- end -%>
