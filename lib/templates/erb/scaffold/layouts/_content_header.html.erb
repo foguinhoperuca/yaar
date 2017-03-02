@@ -1,0 +1,12 @@
+<%= content_for :content_header do %>
+  <h1>
+	<%=t "crud.#{controller.action_name}.title", entity: controller_name.classify.constantize.model_name.human(count: controller.action_name == "index" ? 2 : 1) %>
+  </h1>
+  <ol class="breadcrumb">
+	<li class="active">
+	  <%= link_to polymorphic_url(controller_name.classify.constantize) do %>
+		<i class="fa fa-<%= define_icon_class(controller_name.singularize.to_sym) %>"></i> <span><%= controller_name.classify.constantize.model_name.human(count: 2) %></span>
+	  <% end %>
+	</li>
+  </ol>
+<% end %>

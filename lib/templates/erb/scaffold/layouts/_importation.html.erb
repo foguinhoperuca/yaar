@@ -1,0 +1,21 @@
+<%= content_for :content_header do %>
+  <h1>
+	<%=t 'crud.import.title', entity: controller_name.classify.constantize.model_name.human.pluralize %>
+  </h1>
+  <ol class="breadcrumb">
+	<li class="active">
+	  <%= link_to polymorphic_url(controller_name.classify.constantize) do %>
+		<i class="fa fa-<%= define_icon_class(controller_name.singularize.to_sym) %>"></i> <span><%= controller_name.classify.constantize.model_name.human(count: 2) %></span>
+	  <% end %>
+	</li>
+  </ol>
+<% end %>
+
+<%= form_tag polymorphic_path(["import", controller_name.classify.constantize]), multipart: true do %>
+  <%= file_field_tag :file, :class => 'form-control' %>
+  <%= yield :import_parameters %>
+  <br />
+  <br />
+  <%= submit_tag t('general.link.import'), :class => 'btn btn-success' %>&nbsp;
+  <%= link_to(t('general.link.back'), polymorphic_path(controller_name.classify.constantize), :class => 'btn btn-default') %>
+<% end %>

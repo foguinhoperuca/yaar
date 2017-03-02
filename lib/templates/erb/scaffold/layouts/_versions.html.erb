@@ -1,0 +1,51 @@
+<%= content_for :content_header do %>
+  <h1>
+	<%=t 'crud.versions.title', table_name: @clazz.model_name.human, id: @entity.id %>
+  </h1>
+  <ol class="breadcrumb">
+	<li class="active">
+	  <%= link_to @path do %>
+		<i class="fa fa-code-fork"></i> <span><%= @clazz.model_name.human %></span>
+	  <% end %>
+	</li>
+  </ol>
+<% end %>
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title"><%= t 'crud.versions.box.title' %></h3>
+	<div class="box-tools pull-right">
+	  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+  </div>
+  <div class="box-body">
+	<!-- TODO implement show more details from entities instead of ids... -->
+	<table class="table table-bordered" id="tblRawbillVersions">
+	  <thead>
+		<tr>
+		  <th rowspan="2"><%= t 'crud.versions.box.table.header.attribute' %></th>
+		  <% @versions.each do |version| %>
+			<th colspan="2"><%= t 'crud.versions.box.table.header.version', index: version.index, event: version.event  %> <%= whodunnit(version) %></th>
+		  <% end %>
+		</tr>
+		<tr>
+		  <% @versions.each do |version| %>
+			<td><%= t 'crud.versions.box.table.header.before' %></td>
+			<td><%= t 'crud.versions.box.table.header.after' %></td>
+		  <% end %>
+		</tr>
+	  </thead>
+	  <tbody>
+		<% @clazz.column_names.each do |att| %>
+		  <tr>
+			<td><%= @clazz.human_attribute_name(att) %></td>
+			<% @versions.each do |version| %>
+			  <td><%= version.changeset[att][0] unless version.changeset[att].nil? %></td>
+			  <td><%= version.changeset[att][1] unless version.changeset[att].nil? %></td>
+			<% end %>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
+	<div id="Bfrtip"></div>
+  </div>
+</div>

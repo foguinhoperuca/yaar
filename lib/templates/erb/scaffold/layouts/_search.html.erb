@@ -1,0 +1,28 @@
+<%= form_tag(polymorphic_url(controller_name.classify.constantize), :method => "get", id: "search-form") do %>
+  <p>
+	<div class="input-group input-group-sm">
+	  <%= text_field_tag :search, params[:search], placeholder: t("#{controller_name.singularize}.index.search"), :class => 'form-control' %>
+      <span class="input-group-btn">
+		<%= submit_tag t("general.link.search"), :class => 'btn btn-xs btn-info btn-flat' %>
+      </span>
+    </div>
+	<%= label_tag(:lbl_per_page, t('general.per_page')) %>
+	<%= radio_button_tag(:per_page, "10") %>
+	<%= label_tag(:per_page_10, "10") %>
+	<%= radio_button_tag(:per_page, "25") %>
+	<%= label_tag(:per_page_25, "25") %>
+	<%= radio_button_tag(:per_page, "50") %>
+	<%= label_tag(:per_page_50, "50") %>
+	<%= radio_button_tag(:per_page, "100") %>
+	<%= label_tag(:per_page_100, "100") %>
+	<%= radio_button_tag(:per_page, "200") %>
+	<%= label_tag(:per_page_200, "200") %>
+	<%= radio_button_tag(:per_page, "500") %>
+	<%= label_tag(:per_page_500, "500") %>
+	<%= radio_button_tag(:per_page, "1000") %>
+	<%= label_tag(:per_page_100, "1000") %>
+	<%= radio_button_tag(:per_page, "all") %>
+	<%= label_tag(:per_page_all, t("crud.search.all"), :class => 'label label-warning') %>
+	<%= link_to(t('general.link.index'), polymorphic_url([controller_name.classify.constantize], :per_page => "all"), :class => 'btn btn-xs btn-danger') %>
+  </p>
+<% end %>

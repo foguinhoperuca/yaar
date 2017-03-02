@@ -1,0 +1,293 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+	<!-- Sidebar Menu -->
+	<ul class="sidebar-menu">
+	  <% if user_signed_in? %>
+		<!-- TODO user admin has a different menu from another users. -->
+		<!-- FIXME menu need reload to fix behaivor -->
+		<li class="header"><%= t 'menu.main.header' %></li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-money"></i> <span><%= t 'menu.main.billing' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to invoices_path do %>
+				<i class="fa fa-link"></i> <span><%= Invoice.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to bills_path do %>
+				<i class="fa fa-link"></i> <span><%= Bill.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to contract_informations_path do %>
+				<i class="fa fa-link"></i> <span><%= ContractInformation.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to rawbills_path do %>
+				<i class="fa fa-link"></i> <span><%= Rawbill.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to opinions_path do %>
+				<i class="fa fa-link"></i> <span><%= Opinion.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to contestations_path do %>
+				<i class="fa fa-link"></i> <span><%= Contestation.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to log_failed_rawbill_imports_path do %>
+				<i class="fa fa-link"></i> <span><%= LogFailedRawbillImport.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to load_invoices_path do %>
+				<i class="fa fa-link"></i> <span><%= LoadInvoice.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to criteria_path do %>
+				<i class="fa fa-link"></i> <span><%= Criterium.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to group_criteria_path do %>
+				<i class="fa fa-link"></i> <span><%= GroupCriterium.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-print"></i> <span><%= t 'menu.main.unified_printer_registration' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to sites_path do %>
+				<i class="fa fa-link"></i> <span><%= Site.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to departments_path do %>
+				<i class="fa fa-link"></i> <span><%= Department.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%= Printer.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printer_types_path do %>
+				<i class="fa fa-link"></i> <span><%= PrinterType.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printer_models_path do %>
+				<i class="fa fa-link"></i> <span><%= PrinterModel.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to responsibles_path do %>
+				<i class="fa fa-link"></i> <span><%= Responsible.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_gather_information_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'activerecord.models.gather_information.other' %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-line-chart"></i> <span><%= t 'menu.main.reports.header' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to geoprocessing_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.main.reports.geoprocessing' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to report_invoice_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.main.reports.invoice' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to report_site_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.main.reports.site' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.main.reports.sla' %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-exclamation-triangle"></i> <span><%= t 'menu.main.penalty.header' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.main.penalty.infringement' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%#= PenaltyType.model_name.human(count: 2) %>Tipo Penalidade</span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%#= Penalty.model_name.human(count: 2) %>Penalidades</span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%#= Event.model_name.human(count: 2) %>Evento</span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%#= Appeal.model_name.human(count: 2) %>Recurso</span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+
+		<li class="header"><%= t 'menu.support_func.header' %></li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-file-archive-o"></i> <span><%= t 'menu.support_func.export_data.header' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to downloadPrinters_path(:format => :csv)  do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.support_func.export_data.printers' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to export_rawbills_path(:format => :csv)  do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.support_func.export_data.rawbills' %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-map-signs"></i> <span><%= t 'menu.support_func.physical_site.header' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to physical_sites_path do %>
+				<i class="fa fa-link"></i> <span><%= PhysicalSite.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to physical_site_aliases_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.support_func.physical_site.physical_site_alias' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to physical_site_types_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.support_func.physical_site.physical_site_type' %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to pms_systems_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.support_func.physical_site.pms_system' %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-server"></i> <span><%= t 'menu.support_func.vlan' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to configuration_items_path do %>
+				<i class="fa fa-link"></i> <span><%= ConfigurationItem.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to ip_addresses_path do %>
+				<i class="fa fa-link"></i> <span><%= IpAddress.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to ip_ranges_path do %>
+				<i class="fa fa-link"></i> <span><%= IpRange.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+			<li>
+			  <%= link_to vlans_path do %>
+				<i class="fa fa-link"></i> <span><%= Vlan.model_name.human(count: 2) %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+		<li class="treeview">
+		  <a href="#">
+			<i class="fa fa-truck"></i> <span><%= t 'menu.support_func.supply_registration.header' %></span>
+			<i class="fa fa-angle-left pull-right"></i>
+		  </a>
+		  <ul class="treeview-menu">
+			<li>
+			  <%= link_to printers_path do %>
+				<i class="fa fa-link"></i> <span><%= t 'menu.support_func.supply_registration.supply_register' %></span>
+			  <% end %>
+			</li>
+		  </ul>
+		</li>
+
+		<li class="header"><%= t 'menu.external_systems.header' %></li>
+		<li>
+		  <%= link_to "http://www.redmine.org" do %>
+			<i class="fa fa-external-link"></i> <span><%= t 'menu.external_systems.helpdesk' %></span>
+		  <% end %>
+		</li>
+		<li>
+		  <%= link_to "http://helpdeskclient.tecnoset.com.br:90/Pref_Sorocaba/index.php" do %>
+			<i class="fa fa-external-link"></i> <span><%= t 'menu.external_systems.helpdesk_contractor' %></span>
+		  <% end %>
+		</li>
+		<li>
+		  <%= link_to "http://oe-billing.tecnoset.com.br/n-Billing/Enterprises/Security/Login.aspx" do %>
+			<i class="fa fa-external-link"></i> <span><%= t 'menu.external_systems.billing_contractor' %></span>
+		  <% end %>
+		</li>
+		<li>
+		  <%= link_to "http://leideacesso.etransparencia.com.br/sorocaba.prefeitura.sp/Portal/desktop.html?405" do %>
+			<i class="fa fa-external-link"></i> <span><%= t 'menu.external_systems.lai' %></span>
+		  <% end %>
+		</li>
+	  <% else %>
+		<li class="header">Usu&aacute;rio</li>
+		<li><a href="/users/sign_up"><i class="fa fa-link"></i> <span>Cadastre-se</span></a></li>
+		<li><a href="/users/sign_in"><i class="fa fa-link"></i> <span>Identifique-se</span></a></li>
+	  <% end %>
+	</ul>
+	<!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>
