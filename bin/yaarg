@@ -2,4 +2,33 @@
 
 require 'yaarg'
 
-puts Yaarg.help
+# if __FILE__ == $0
+  case ARGV[0]
+  when "version"
+    puts "Showing version... #{Yaarg.ver}"
+  # Gather Information
+  # when "printer_production"
+  #   GatherInformation.getPrinterProduction(ARGV[1])
+  when "tpl"
+    puts "coping templates..."
+    case ARGV[1]
+    when "all"
+      Yaarg.tpl(ARGV[2])
+    when "model"
+      puts "model..."
+    when "view"
+      puts "view..."
+    when "controller"
+      puts "controller..."
+    else
+      puts "need choose the correct ARGV[1]: [model|view|cotroller]"
+    end
+  else
+    puts "Used ARGV:"
+    puts "=========="
+    ARGV.each do |a|
+      puts Yaarg.help
+      puts "arguments: #{a}"
+    end
+  end
+# end
