@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require 'yaarg'
+require 'os'
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -14,7 +15,7 @@ task :manual do
   Rake::Task["deploy:local"].invoke
   puts "running the gem..."
   puts "version: #{Yaarg.ver}"
-  system("yaarg")
+  # system("yaarg")
 end
 
 task :build do
@@ -25,6 +26,7 @@ end
 namespace :deploy do
   task :local do
     puts "installing the gem..."
-    system("sudo gem install yaarg-#{Yaarg.ver}.gem")
+    cmd = (OS.windows?) ? "gem install yaarg-#{Yaarg.ver}.gem" : "sudo gem install yaarg-#{Yaarg.ver}.gem"
+    system(cmd)
   end
 end

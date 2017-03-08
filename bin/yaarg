@@ -21,7 +21,7 @@ require 'yaarg'
     when "controller"
       puts "controller..."
     else
-      puts "need choose the correct ARGV[1]: [model|view|cotroller]"
+      puts "need choose the correct ARGV[1]: [all|model|view|cotroller]"
     end
   else
     puts "Used ARGV:"
