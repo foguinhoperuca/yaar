@@ -47,21 +47,21 @@ module Yaarg
   
   def self.tpl_model(project_path)
     path = project_path + "lib/templates/active_record/model/"
-    # FileUtils.mkdir(path) unless Dir.exist? path
-    FileUtils.cp("../lib/templates/active_record/model/model.rb", path)
+    FileUtils.mkdir_p(path) unless Dir.exist? path
+    FileUtils.cp(File.dirname(__FILE__) + "/templates/active_record/model/model.rb", path)
   end
 
   def self.tpl_view(project_path)
     path = project_path + "lib/templates/erb/scaffold"
-    # FileUtils.mkdir(path) unless Dir.exist? path
-    FileUtils.cp("../lib/templates/erb/scaffold/index.html.erb", path)
-    FileUtils.cp("../lib/templates/erb/scaffold/_form.html.erb", path)
+    FileUtils.mkdir_p(path) unless Dir.exist? path
+    FileUtils.cp(File.dirname(__FILE__) + "/templates/erb/scaffold/index.html.erb", path)
+    FileUtils.cp(File.dirname(__FILE__) + "/templates/erb/scaffold/_form.html.erb", path)
   end
 
   def self.tpl_controller(project_path)
     path = project_path + "lib/templates/rails/scaffold_controller/"
-    # FileUtils.mkdir(path) unless Dir.exist? path
-    FileUtils.cp("../lib/templates/rails/scaffold_controller/controller.rb", path)
+    FileUtils.mkdir_p(path) unless Dir.exist? path
+    FileUtils.cp(File.dirname(__FILE__) + "/templates/rails/scaffold_controller/controller.rb", path)
   end
   
   # end
