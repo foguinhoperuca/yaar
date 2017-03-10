@@ -1,8 +1,7 @@
 <%%= form_for(@<%= singular_table_name %>) do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
   <div id="error_explanation">
-    <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
-
+    <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, t("crud.form.error.error")) %> <%%=t 'crud.form.error.message', entity: <%= singular_table_name.classify.constantize %>.model_name.human %>:</h2>
     <ul>
       <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
         <li><%%= message %></li>
@@ -10,7 +9,6 @@
     </ul>
   </div>
   <%% end %>
-
   <% attributes.each do |attribute| -%>
     <% if attribute.password_digest? -%>
   	  <div class="field">
@@ -45,20 +43,20 @@
   		  <div class="field">
   			<div class="checkbox">
   			  <%%= f.label "<%= attribute.name %>" do %>
-  				<%%= f.<%= attribute.field_type %> :<%= attribute.name %> %> <%%= <%= class_name %>.human_attribute_name("<%= attribute.name %>") %>
+  				<%%= f.<%= attribute.field_type %> :<%= attribute.name %>, :disabled => disable_control %> <%%= <%= class_name %>.human_attribute_name("<%= attribute.name %>") %>
   				<%% end %>
   			</div>
   		  </div>
-  		<%- else -%>
+  			  <%- else -%>
   		  <div class="field">
   			<%%= f.label :<%= attribute.name %> %><br />
-  			<%%= f.<%= attribute.field_type %> :<%= attribute.name %>, :class => 'form-control' %>
+  			<%%= f.<%= attribute.field_type %> :<%= attribute.name %>, :class => 'form-control', :disabled => disable_control %>
   		  </div>
+  			  <%- end -%>
   		<%- end -%>
-  	  <%- end -%>
-    <% end -%>
-  <% end -%>
-  <div class="actions">
-  	<%%= f.submit %>
+				<% end -%>
+	  <% end -%>
+	  <div class="actions">
+  		<%%= f.submit :class => 'btn btn-success', :disabled => disable_control %>
   </div>
 <%% end %>

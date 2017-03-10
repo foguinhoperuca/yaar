@@ -10,16 +10,18 @@ require 'yaarg'
   # when "printer_production"
   #   GatherInformation.getPrinterProduction(ARGV[1])
   when "tpl"
-    puts "coping templates..."
+    p "================================================================================"
+    p "Copying templates. Option: #{ARGV[1]}"
+    p "================================================================================"
     case ARGV[1]
     when "all"
       Yaarg.tpl(ARGV[2])
     when "model"
-      puts "model..."
+      Yaarg.model(ARGV[2])
     when "view"
-      puts "view..."
+      Yaarg.view(ARGV[2])
     when "controller"
-      puts "controller..."
+      Yaarg.controller(ARGV[2])
     else
       puts "need choose the correct ARGV[1]: [all|model|view|cotroller]"
     end

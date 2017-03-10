@@ -15,38 +15,38 @@
 		  <% attributes.reject(&:password_digest?).each do |attribute| -%>
 			<th><%%= <%= class_name %>.human_attribute_name("<%= attribute.name %>") %></th>
 		  <% end -%>
-		  <th><%=t 'general.table.action.crud' %></th>
+		  <th><%%=t 'general.table.action.crud' %></th>
 		</tr>
 	  </thead>
 	  <tbody>
-	  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-		<tr>
-		  <% attributes.reject(&:password_digest?).each do |attribute| -%>
-			<%- if attribute.reference? -%>
+		<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+		  <tr>
+			<% attributes.reject(&:password_digest?).each do |attribute| -%>
+			  <% if attribute.reference? -%>
+				<td>
+				  <%%= link_to <%= attribute.name %>_path(<%= singular_table_name %>.<%= attribute.name %>) do %>
+					<span class="label label-info"><%%= <%= singular_table_name %>.<%= attribute.name %>&.id %></span>
+					<%% end %>
+				</td>
+				  <% elsif attribute.type.eql?(:boolean) -%>
+				<td>
+				  <span class="label label-<%%= <%= singular_table_name %>.<%= attribute.name %> ? 'success' : 'danger' %>">
+					<%%= <%= singular_table_name %>.<%= attribute.name %> ? t('general.bool_yes') : t('general.bool_no') %>
+				  </span>
+				</td>
+				  <% else -%>
+				<td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+				  <% end -%>
+			  <% end -%>
 			  <td>
-				<%%= link_to <%= attribute.name %>_path(<%= singular_table_name %>.<%= attribute.name %>) do %>
-				  <span class="label label-info"><%%= <%= singular_table_name %>.<%= attribute.name %>&.id %></span>
-				<%% end %>
+				<%%= link_to t('general.link.show'), <%= singular_table_name %>, :class => 'btn btn-xs btn-info' %>&nbsp;|&nbsp;
+				<%%= link_to t('general.link.edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => 'btn btn-xs btn-warning' %>&nbsp;|&nbsp;
+				<%%= link_to t('general.link.destroy.label'), <%= singular_table_name %>, method: :delete, data: { confirm: t('general.action.destroy.message') }, :class => 'btn btn-xs btn-danger' %>
 			  </td>
-			<%- elsif attribute.type.eql?(:boolean) -%>
-			  <td>
-				<span class="label label-<%%= <%= singular_table_name %>.<%= attribute.name %> ? 'success' : 'danger' %>">
-				  <%%= <%= singular_table_name %>.<%= attribute.name %> ? t('general.bool_yes') : t('general.bool_no') %>
-				</span>
-			  </td>
-			<%- else -%>
-			  <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
-			<%- end -%>
-		  <% end -%>
-		  <td>
-			<%%= link_to t('general.action.show'), <%= singular_table_name %>, :class => 'btn btn-xs btn-info' %>&nbsp;|&nbsp;
-			<%%= link_to t('general.action.edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => 'btn btn-xs btn-warning' %>&nbsp;|&nbsp;
-			<%%= link_to t('general.action.destroy.label'), <%= singular_table_name %>, method: :delete, data: { confirm: t('general.action.destroy.message') }, :class => 'btn btn-xs btn-danger' %>
-		  </td>
-		</tr>
-		<%% end %>
+		  </tr>
+		  <%% end %>
 	  </tbody>
 	</table>
   </div>
 </div>
-<%%= link_to "#{t('general.action.new')}", new_<%= singular_table_name %>_path, :class => 'btn btn-xs btn-primary' %>
+<%%= link_to "#{t('general.link.new')}", new_<%= singular_table_name %>_path, :class => 'btn btn-xs btn-primary' %>
