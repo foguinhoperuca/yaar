@@ -49,7 +49,7 @@ task :scaff do
   # system("head #{scaff_path}/lib/templates/erb/scaffold/_form.html.erb")
   # p "____________________________________________________________________________________"
   
-  scaff_path = (OS.windows?) ? "c:\\universal\\projects\\scaff" : "~/universal/projects/scaff"
+  scaff_path = (OS.windows?) ? "c:\\universal\\projects\\scaff" : "/home/jefferson/universal/projects/scaff"
   Dir.chdir(scaff_path) do
     unless Dir.exists?(scaff_path + "/app/views/products") then
       system("rails destroy scaffold Product")
