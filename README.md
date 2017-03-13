@@ -40,8 +40,13 @@ lib/templates/active_record/model/model.rb
 
 * 
 
-## Rails Asset
+### Rails Asset ###
 
-* use rails-assets;
-* Add public/css/_all-skins.css.min;
-* Profit...
+* use [rails-assets](https://rails-assets.org "Integrate buncler and bower"):
+** [admin-lte](https://github.com/almasaeed2010/AdminLTE "AdminLTE -- is a fully responsive admin template")
+** [jquery-slimscroll](https://github.com/rochal/jQuery-slimScroll "slimScroll is a small jQuery plugin that transforms any div into a scrollable area with a nice scrollbar")
+** [fastclick](https://github.com/ftlabs/fastclick "FastClick is a simple, easy-to-use library for eliminating the 300ms delay between a physical tap and the firing of a click event on mobile browsers.")
+* Configure config/initializers/assets.rb for plugins installed
+* Add public/css/_all-skins.min.css;
+
+**Profit!!!**
