@@ -39,3 +39,9 @@ lib/templates/active_record/model/model.rb
 ## App
 
 * 
+
+## Rails Asset
+
+* use rails-assets;
+* Add public/css/_all-skins.css.min;
+* Profit...
